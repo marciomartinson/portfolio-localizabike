@@ -156,6 +156,43 @@ h1.title{font-size:28px;font-weight:800;color:var(--n-900);line-height:1.18;lett
 .addr{display:flex;align-items:center;gap:7px;font-size:14px;color:var(--n-600);margin-top:6px}
 .restart-btn{background:rgba(255,255,255,.10);color:#cfeede;border:1px solid rgba(255,255,255,.2);padding:8px 16px;border-radius:var(--radius-full);font-size:12.5px;font-weight:600;cursor:pointer;font-family:var(--font)}
 .restart-btn:hover{background:rgba(255,255,255,.18)}
+/* plans scroll (desktop) */
+.plans{scrollbar-width:thin;scrollbar-color:var(--primary-300) var(--n-100)}
+.plans::-webkit-scrollbar{height:8px}
+.plans::-webkit-scrollbar-track{background:var(--n-100);border-radius:4px;margin:0 22px}
+.plans::-webkit-scrollbar-thumb{background:var(--primary-300);border-radius:4px}
+.plans::-webkit-scrollbar-thumb:hover{background:var(--primary-400)}
+.scroll-hint{font-size:11.5px;color:var(--n-500);padding:4px 22px 0;display:flex;align-items:center;gap:6px}
+/* clickable map pins */
+.mappin{position:absolute;transform:translate(-50%,-100%);cursor:pointer;z-index:10;border:none;background:transparent;padding:0;filter:drop-shadow(0 4px 6px rgba(0,0,0,.22));transition:transform .15s}
+.mappin:hover{transform:translate(-50%,-104%) scale(1.09)}
+.mappin .pill{display:flex;align-items:center;gap:5px;background:var(--primary-500);color:#fff;padding:6px 11px 6px 9px;border-radius:var(--radius-full);font-size:13px;font-weight:700;position:relative}
+.mappin .pill svg{width:15px;height:11px}
+.mappin .pill::after{content:"";position:absolute;bottom:-5px;left:50%;transform:translateX(-50%);border-left:6px solid transparent;border-right:6px solid transparent;border-top:7px solid var(--primary-500)}
+.mappin .ping{position:absolute;left:50%;top:35%;width:26px;height:26px;margin-left:-13px;margin-top:-13px;border-radius:50%;background:var(--primary-400);opacity:.55;animation:ping 2s ease-out infinite;z-index:-1}
+@keyframes ping{0%{transform:scale(.6);opacity:.55}80%{transform:scale(2.6);opacity:0}100%{opacity:0}}
+.map-hint{position:absolute;left:20px;right:20px;top:76px;text-align:center;font-size:12px;color:var(--n-700);background:rgba(255,255,255,.92);padding:7px 14px;border-radius:var(--radius-full);box-shadow:var(--shadow-sm);z-index:14;font-weight:600}
+/* bike type toggle */
+.field-label{font-size:12px;font-weight:700;letter-spacing:.4px;color:var(--n-500);text-transform:uppercase;margin-bottom:10px}
+.type-row{display:flex;gap:10px;margin-bottom:4px}
+.chip-toggle{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:7px;border:1.5px solid var(--n-300);color:var(--n-600);background:#fff;font-size:13.5px;font-weight:600;padding:12px 10px;border-radius:var(--radius-lg);cursor:pointer;font-family:var(--font);transition:all .15s}
+.chip-toggle:hover{border-color:var(--primary-300)}
+.chip-toggle.active{border-color:var(--primary-500);background:var(--primary-50);color:var(--primary-700)}
+.chip-toggle .ck{width:16px;height:16px;opacity:0;transition:opacity .15s}
+.chip-toggle.active .ck{opacity:1}
+/* reservation popup */
+.resv-popup{position:absolute;left:16px;right:16px;bottom:90px;background:#fff;border-radius:var(--radius-2xl);box-shadow:0 12px 30px -6px rgba(0,0,0,.28);z-index:40;padding:18px;border:1px solid var(--n-100);animation:slideup .35s cubic-bezier(.2,.8,.2,1)}
+@keyframes slideup{from{transform:translateY(24px);opacity:0}to{transform:none;opacity:1}}
+.resv-top{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.resv-ic{width:46px;height:46px;border-radius:var(--radius-lg);background:var(--primary-50);display:flex;align-items:center;justify-content:center;color:var(--primary-500);flex:0 0 auto}
+.resv-top h3{font-size:15.5px;font-weight:700;color:var(--n-900);line-height:1.25}
+.resv-top small{font-size:12.5px;color:var(--n-600)}
+.resv-close{position:absolute;top:14px;right:14px;width:28px;height:28px;border-radius:50%;background:var(--n-100);border:none;cursor:pointer;color:var(--n-600);display:flex;align-items:center;justify-content:center}
+.resv-info{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.resv-pill{font-size:12px;font-weight:600;color:var(--n-700);background:var(--n-50);border:1px solid var(--n-200);padding:7px 12px;border-radius:var(--radius-full)}
+.status-badge{display:inline-flex;align-items:center;gap:8px;background:#FFF7E6;color:#B45309;border:1px solid #FCD9A0;font-size:13px;font-weight:700;padding:10px 14px;border-radius:var(--radius-full);width:100%;justify-content:center}
+.status-badge .dot{width:8px;height:8px;border-radius:50%;background:#F59E0B;animation:blink 1.2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
 @media (max-width:440px){.device{transform:scale(.86);transform-origin:top center}body{padding-bottom:0}}
 </style>
 </head>
@@ -225,14 +262,14 @@ h1.title{font-size:28px;font-weight:800;color:var(--n-900);line-height:1.18;lett
           <label>E-mail ou CPF</label>
           <div class="input">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6" stroke="currentColor" stroke-width="2"/></svg>
-            <input type="text" value="marcio.silva@email.com">
+            <input id="loginEmail" type="text" value="marcio.silva@email.com" onkeydown="if(event.key==='Enter')go('s-planos')">
           </div>
         </div>
         <div class="field" style="margin-bottom:10px">
           <label>Senha</label>
           <div class="input">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="4" y="10" width="16" height="11" rx="2" stroke="currentColor" stroke-width="2"/><path d="M8 10V7a4 4 0 018 0v3" stroke="currentColor" stroke-width="2"/></svg>
-            <input type="password" value="senha1234">
+            <input type="password" value="senha1234" onkeydown="if(event.key==='Enter')go('s-planos')">
             <svg class="eye" width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/><path d="M3 3l18 18" stroke="currentColor" stroke-width="2"/></svg>
           </div>
         </div>
@@ -242,7 +279,49 @@ h1.title{font-size:28px;font-weight:800;color:var(--n-900);line-height:1.18;lett
         <button class="btn btn-social" onclick="go('s-planos')"><img src="assets/google.png" alt="">Continuar com Google</button>
         <button class="btn btn-social" style="margin-top:12px" onclick="go('s-planos')"><img src="assets/apple.png" alt="">Continuar com Apple</button>
         <button class="btn btn-fb" style="margin-top:12px;font-size:14px" onclick="go('s-planos')"><img src="assets/facebook.png" alt="">Continuar com Facebook</button>
-        <p style="text-align:center;font-size:14px;color:var(--n-600);margin-top:26px">Não tem uma conta? <a class="link">Cadastre-se</a></p>
+        <p style="text-align:center;font-size:14px;color:var(--n-600);margin-top:26px">Não tem uma conta? <a class="link" onclick="go('s-cadastro')">Cadastre-se</a></p>
+      </div>
+    </section>
+
+    <!-- CADASTRO -->
+    <section class="screen" id="s-cadastro">
+      <div class="topbar">
+        <button class="icon-btn" onclick="go('s-login',true)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M15 5l-7 7 7 7" stroke="#343A40" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <span style="font-size:16px;font-weight:700;color:var(--n-900)">Criar conta</span>
+        <span style="width:40px"></span>
+      </div>
+      <div class="scroll pad" style="padding-top:18px;padding-bottom:24px">
+        <p style="font-size:14px;color:var(--n-600);margin-bottom:24px">Preencha seus dados para começar a pedalar.</p>
+        <div class="field">
+          <label>Nome completo</label>
+          <div class="input">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6" stroke="currentColor" stroke-width="2"/></svg>
+            <input id="cadNome" type="text" placeholder="Ex.: Marcio Silva">
+          </div>
+        </div>
+        <div class="field">
+          <label>E-mail</label>
+          <div class="input">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="2"/><path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="2"/></svg>
+            <input id="cadEmail" type="email" placeholder="seu@email.com">
+          </div>
+        </div>
+        <div class="field">
+          <label>Telefone</label>
+          <div class="input">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 4h4l2 5-3 2a12 12 0 005 5l2-3 5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+            <input id="cadTel" type="tel" placeholder="(11) 99999-9999">
+          </div>
+        </div>
+        <div class="field" style="margin-bottom:24px">
+          <label>Endereço</label>
+          <div class="input">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 21s7-6.5 7-12a7 7 0 10-14 0c0 5.5 7 12 7 12z" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="9" r="2.5" stroke="currentColor" stroke-width="2"/></svg>
+            <input id="cadEnd" type="text" placeholder="Rua, número - bairro">
+          </div>
+        </div>
+        <button class="btn btn-primary" onclick="cadastrar()">Cadastrar</button>
+        <button class="btn btn-outline" style="margin-top:12px" onclick="limparCadastro()">Limpar</button>
       </div>
     </section>
 
@@ -283,6 +362,7 @@ h1.title{font-size:28px;font-weight:800;color:var(--n-900);line-height:1.18;lett
               <button class="btn btn-primary" onclick="abrirPlano('familia')">Selecionar Plano</button>
             </div>
           </div>
+          <div class="scroll-hint">← Arraste ou role para ver todos os planos →</div>
         </div>
       </div>
     </section>
@@ -301,14 +381,26 @@ h1.title{font-size:28px;font-weight:800;color:var(--n-900);line-height:1.18;lett
           <input placeholder="Pesquise a localização">
           <svg width="16" height="20" viewBox="0 0 16 22" fill="none"><rect x="5" y="1" width="6" height="12" rx="3" stroke="#00843D" stroke-width="2"/><path d="M2 10a6 6 0 0012 0M8 16v4" stroke="#00843D" stroke-width="2" stroke-linecap="round"/></svg>
         </div>
-        <!-- hotspots sobre os pins da imagem do mapa -->
-        <button class="hotspot" style="left:35%;top:22%" onclick="go('s-detalhes')"></button>
-        <button class="hotspot" style="left:62%;top:18%" onclick="go('s-detalhes')"></button>
-        <button class="hotspot" style="left:52%;top:42%" onclick="go('s-detalhes')"></button>
-        <button class="hotspot" style="left:82%;top:34%" onclick="go('s-detalhes')"></button>
-        <button class="hotspot" style="left:22%;top:55%" onclick="go('s-detalhes')"></button>
-        <button class="hotspot" style="left:42%;top:70%" onclick="go('s-detalhes')"></button>
-        <button class="hotspot" style="left:72%;top:66%" onclick="go('s-detalhes')"></button>
+        <div class="map-hint">Toque em uma estação para ver as bikes 🚲</div>
+        <button class="mappin" style="left:33%;top:26%" onclick="go('s-detalhes')"><span class="ping"></span><span class="pill"><svg viewBox="0 0 24 16" fill="none"><circle cx="5" cy="11" r="4" stroke="#fff" stroke-width="2"/><circle cx="19" cy="11" r="4" stroke="#fff" stroke-width="2"/><path d="M5 11l5-7h6l-4 7M10 4l4 7" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>4</span></button>
+        <button class="mappin" style="left:63%;top:20%" onclick="go('s-detalhes')"><span class="ping"></span><span class="pill"><svg viewBox="0 0 24 16" fill="none"><circle cx="5" cy="11" r="4" stroke="#fff" stroke-width="2"/><circle cx="19" cy="11" r="4" stroke="#fff" stroke-width="2"/><path d="M5 11l5-7h6l-4 7M10 4l4 7" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>8</span></button>
+        <button class="mappin" style="left:50%;top:44%" onclick="go('s-detalhes')"><span class="ping"></span><span class="pill"><svg viewBox="0 0 24 16" fill="none"><circle cx="5" cy="11" r="4" stroke="#fff" stroke-width="2"/><circle cx="19" cy="11" r="4" stroke="#fff" stroke-width="2"/><path d="M5 11l5-7h6l-4 7M10 4l4 7" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>12</span></button>
+        <button class="mappin" style="left:82%;top:36%" onclick="go('s-detalhes')"><span class="ping"></span><span class="pill"><svg viewBox="0 0 24 16" fill="none"><circle cx="5" cy="11" r="4" stroke="#fff" stroke-width="2"/><circle cx="19" cy="11" r="4" stroke="#fff" stroke-width="2"/><path d="M5 11l5-7h6l-4 7M10 4l4 7" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>6</span></button>
+        <button class="mappin" style="left:24%;top:57%" onclick="go('s-detalhes')"><span class="ping"></span><span class="pill"><svg viewBox="0 0 24 16" fill="none"><circle cx="5" cy="11" r="4" stroke="#fff" stroke-width="2"/><circle cx="19" cy="11" r="4" stroke="#fff" stroke-width="2"/><path d="M5 11l5-7h6l-4 7M10 4l4 7" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>3</span></button>
+        <button class="mappin" style="left:44%;top:72%" onclick="go('s-detalhes')"><span class="ping"></span><span class="pill"><svg viewBox="0 0 24 16" fill="none"><circle cx="5" cy="11" r="4" stroke="#fff" stroke-width="2"/><circle cx="19" cy="11" r="4" stroke="#fff" stroke-width="2"/><path d="M5 11l5-7h6l-4 7M10 4l4 7" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>5</span></button>
+        <button class="mappin" style="left:73%;top:67%" onclick="go('s-detalhes')"><span class="ping"></span><span class="pill"><svg viewBox="0 0 24 16" fill="none"><circle cx="5" cy="11" r="4" stroke="#fff" stroke-width="2"/><circle cx="19" cy="11" r="4" stroke="#fff" stroke-width="2"/><path d="M5 11l5-7h6l-4 7M10 4l4 7" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>9</span></button>
+        <div class="resv-popup" id="resvPopup" hidden>
+          <button class="resv-close" onclick="document.getElementById('resvPopup').hidden=true"><svg width="12" height="12" viewBox="0 0 14 14"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+          <div class="resv-top">
+            <div class="resv-ic"><svg width="26" height="18" viewBox="0 0 24 16" fill="none"><circle cx="5" cy="11" r="4" stroke="currentColor" stroke-width="2"/><circle cx="19" cy="11" r="4" stroke="currentColor" stroke-width="2"/><path d="M5 11l5-7h6l-4 7M10 4l4 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+            <div><h3>Aguardando retirada da bicicleta</h3><small>Estação Central Plaza</small></div>
+          </div>
+          <div class="resv-info">
+            <span class="resv-pill">Bike <b id="resvTipo">Elétrica</b></span>
+            <span class="resv-pill" id="resvCode">Código #BK-2847</span>
+          </div>
+          <div class="status-badge"><span class="dot"></span>Aguardando retirada</div>
+        </div>
         <button class="fab"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
         <nav class="bottomnav">
           <button class="navitem active"><svg viewBox="0 0 24 24" fill="none"><path d="M9 20l-6 2V6l6-2 6 2 6-2v16l-6 2-6-2zM9 4v16M15 6v16" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>Mapa</button>
@@ -354,26 +446,33 @@ h1.title{font-size:28px;font-weight:800;color:var(--n-900);line-height:1.18;lett
       <div style="position:relative;flex:1;overflow:hidden">
         <div class="map" style="bottom:auto;height:160px"><img src="assets/map-bg.png" alt="Mapa"></div>
         <div class="scroll" style="position:absolute;inset:0;top:120px;background:transparent;display:block">
-          <div style="background:#fff;border-radius:24px 24px 0 0;min-height:100%;padding-top:8px;box-shadow:var(--shadow-up)">
+          <div style="background:#fff;border-radius:24px 24px 0 0;min-height:100%;padding-top:8px;box-shadow:var(--shadow-up);display:flex;flex-direction:column">
             <div class="grab"></div>
             <div class="station-card">
               <div class="station-photo">
                 <img src="https://images.unsplash.com/photo-1571068316344-75bc76f77890?auto=format&fit=crop&w=700&h=320&q=70" alt="Estação de bikes" onerror="this.style.display='none'">
                 <div class="dist-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M12 21s7-6.5 7-12a7 7 0 10-14 0c0 5.5 7 12 7 12z" stroke="#fff" stroke-width="2"/></svg>600 m</div>
               </div>
-              <div style="padding:18px 4px 0">
+              <div style="padding:18px 4px 0;flex:1;display:flex;flex-direction:column">
                 <h1 style="font-size:24px;font-weight:800;color:var(--n-900)">Estação Central Plaza</h1>
                 <div class="addr"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 21s7-6.5 7-12a7 7 0 10-14 0c0 5.5 7 12 7 12z" stroke="#868E96" stroke-width="2"/><circle cx="12" cy="9" r="2" stroke="#868E96" stroke-width="2"/></svg>Av. Paulista, 1000 - Bela Vista</div>
                 <div class="stat-grid">
                   <div class="stat"><div class="si"><svg width="22" height="15" viewBox="0 0 24 16" fill="none"><circle cx="5" cy="11" r="4" stroke="currentColor" stroke-width="2"/><circle cx="19" cy="11" r="4" stroke="currentColor" stroke-width="2"/><path d="M5 11l5-7h6l-4 7M10 4l4 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div><div><b>12</b><small>Bikes Disponíveis</small></div></div>
                   <div class="stat"><div class="si"><svg width="14" height="20" viewBox="0 0 14 22" fill="none"><rect x="2" y="2" width="10" height="18" rx="2" stroke="currentColor" stroke-width="2"/><path d="M5 6h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div><div><b>8</b><small>Vagas Livres</small></div></div>
                 </div>
-                <div class="chips">
-                  <span class="chip"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>3 Elétricas</span>
-                  <span class="chip"><svg width="15" height="11" viewBox="0 0 24 16" fill="none"><circle cx="5" cy="11" r="4" stroke="currentColor" stroke-width="2"/><circle cx="19" cy="11" r="4" stroke="currentColor" stroke-width="2"/><path d="M5 11l5-7h6l-4 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>9 Clássicas</span>
+                <div class="field-label">Escolha o tipo de bike</div>
+                <div class="type-row">
+                  <button class="chip-toggle active" data-tipo="Elétrica" onclick="selBike(this)">
+                    <svg class="ck" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="currentColor"/><path d="M8 12l3 3 5-6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>3 Elétricas
+                  </button>
+                  <button class="chip-toggle" data-tipo="Clássica" onclick="selBike(this)">
+                    <svg class="ck" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="currentColor"/><path d="M8 12l3 3 5-6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <svg width="15" height="11" viewBox="0 0 24 16" fill="none"><circle cx="5" cy="11" r="4" stroke="currentColor" stroke-width="2"/><circle cx="19" cy="11" r="4" stroke="currentColor" stroke-width="2"/><path d="M5 11l5-7h6l-4 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>9 Clássicas
+                  </button>
                 </div>
-                <button class="btn btn-primary" style="margin-bottom:12px" onclick="reservar()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5v14" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/></svg>Reservar Agora</button>
-                <button class="btn btn-outline" style="margin-bottom:24px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 21s7-6.5 7-12a7 7 0 10-14 0c0 5.5 7 12 7 12z" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="9" r="2" stroke="currentColor" stroke-width="2"/></svg>Ver Trajeto</button>
+                <div style="flex:1;min-height:14px"></div>
+                <button class="btn btn-primary" style="margin-top:18px;margin-bottom:22px" onclick="reservar()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5v14" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/></svg>Reservar Agora</button>
               </div>
             </div>
           </div>
@@ -406,7 +505,36 @@ function abrirPlano(tipo){
   confTag.textContent=p.tag; confTitle.textContent=p.title; confPrice.textContent=p.price; confPer.textContent=p.per; benefit1.textContent=p.b1;
   go('s-confirmar');
 }
-function reservar(){ alert('🚲 Bike reservada com sucesso na Estação Central Plaza!\n\nVocê tem 10 minutos para retirar.'); }
+let selectedBikeType = 'Elétrica';
+function selBike(el){
+  el.parentElement.querySelectorAll('.chip-toggle').forEach(c=>c.classList.remove('active'));
+  el.classList.add('active');
+  selectedBikeType = el.dataset.tipo;
+}
+function reservar(){
+  const tipo = selectedBikeType;
+  alert('🚲 Bike '+tipo+' reservada com sucesso na Estação Central Plaza!\n\nVocê tem 10 minutos para retirar.');
+  const code = 'Código #BK-' + (1000 + Math.floor(Math.random()*8999));
+  document.getElementById('resvTipo').textContent = tipo;
+  document.getElementById('resvCode').textContent = code;
+  go('s-mapa');
+  document.getElementById('resvPopup').hidden = false;
+}
+function cadastrar(){
+  const email = (document.getElementById('cadEmail').value || '').trim();
+  if(email){ document.getElementById('loginEmail').value = email; }
+  go('s-login', true);
+}
+function limparCadastro(){
+  ['cadNome','cadEmail','cadTel','cadEnd'].forEach(id=>{ const f=document.getElementById(id); if(f) f.value=''; });
+  document.getElementById('cadNome').focus();
+}
+// scroll horizontal dos planos com a roda do mouse (desktop)
+document.querySelectorAll('.plans').forEach(el=>{
+  el.addEventListener('wheel', e=>{
+    if(Math.abs(e.deltaY) > Math.abs(e.deltaX)){ el.scrollLeft += e.deltaY; e.preventDefault(); }
+  }, {passive:false});
+});
 function startSplash(){
   const fill = document.getElementById('splashFill');
   fill.style.transition='none'; fill.style.width='0%';
